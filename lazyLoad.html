@@ -1,0 +1,173 @@
+<!doctype html>
+<html>  
+    <head>
+        <meta charset="utf-8">
+        <style>
+            .images{
+                display: flex;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            .images>.wrap{
+                margin: 10px;
+                width: 350px;
+                height: 200px;
+
+            }
+        </style>
+    </head>
+    <body>
+        <div class = 'images'>
+            <div class="wrap">
+            <img src="http://via.placeholder.com/350x200?text=1" alt="">
+            </div>
+            <div class="wrap">
+            <img src="http://via.placeholder.com/350x200?text=2" alt="">
+            </div>
+            <div class="wrap">
+            <img src="http://via.placeholder.com/350x200?text=3" alt="">
+            </div>
+            <div class="wrap">
+            <img src="http://via.placeholder.com/350x200?text=4" alt="">
+            </div>
+            <div class="wrap">
+            <img src="http://via.placeholder.com/350x200?text=5" alt="">
+            </div>
+            <div class="wrap">
+            <img src="http://via.placeholder.com/350x200?text=6" alt="">
+            </div>
+            <div class="wrap">
+            <img src="http://via.placeholder.com/350x200?text=7" alt="">
+            </div>
+            <div class="wrap">
+            <img src="http://via.placeholder.com/350x200?text=8" alt="">
+            </div>
+            <div class="wrap">
+            <img src="http://via.placeholder.com/350x200?text=9" alt="">
+            </div>
+            <div class="wrap">
+            <img data-src="http://via.placeholder.com/350x200?text=10" alt="">
+            </div>
+            <div class="wrap">
+            <img data-src="http://via.placeholder.com/350x200?text=11" alt="">
+            </div>
+            <div class="wrap">
+            <img data-src="http://via.placeholder.com/350x200?text=12" alt="">
+            </div>
+            <div class="wrap">
+            <img data-src="http://via.placeholder.com/350x200?text=13" alt="">
+            </div>
+            <div class="wrap">
+            <img data-src="http://via.placeholder.com/350x200?text=14" alt="">
+            </div>
+            <div class="wrap">
+            <img data-src="http://via.placeholder.com/350x200?text=15" alt="">
+            </div>
+            <div class="wrap">
+            <img data-src="http://via.placeholder.com/350x200?text=16" alt="">
+            </div>
+            <div class="wrap">
+            <img data-src="http://via.placeholder.com/350x200?text=17" alt="">
+            </div>
+            <div class="wrap">
+            <img data-src="http://via.placeholder.com/350x200?text=18" alt="">
+            </div>
+            <div class="wrap">
+            <img data-src="http://via.placeholder.com/350x200?text=19" alt="">
+            </div>
+            <div class="wrap">
+            <img data-src="http://via.placeholder.com/350x200?text=20" alt="">
+            </div>
+            <div class="wrap">
+            <img data-src="http://via.placeholder.com/350x200?text=21" alt="">
+            </div>
+            <div class="wrap">
+            <img data-src="http://via.placeholder.com/350x200?text=22" alt="">
+            </div>
+            <div class="wrap">
+            <img data-src="http://via.placeholder.com/350x200?text=23" alt="">
+            </div>
+            <div class="wrap">
+            <img data-src="http://via.placeholder.com/350x200?text=24" alt="">
+            </div>
+            <div class="wrap">
+            <img data-src="http://via.placeholder.com/350x200?text=25" alt="">
+            </div>
+            <div class="wrap">
+            <img data-src="http://via.placeholder.com/350x200?text=26" alt="">
+            </div>
+            <div class="wrap">
+            <img data-src="http://via.placeholder.com/350x200?text=27" alt="">
+            </div>
+            <div class="wrap">
+            <img data-src="http://via.placeholder.com/350x200?text=28" alt="">
+            </div>
+            <div class="wrap">
+            <img data-src="http://via.placeholder.com/350x200?text=29" alt="">
+            </div>
+            <div class="wrap">
+            <img data-src="http://via.placeholder.com/350x200?text=30" alt="">
+            </div>
+            <div class="wrap">
+            <img data-src="http://via.placeholder.com/350x200?text=31" alt="">
+            </div>
+            <div class="wrap">
+            <img data-src="http://via.placeholder.com/350x200?text=32" alt="">
+            </div>
+            <div class="wrap">
+            <img data-src="http://via.placeholder.com/350x200?text=33" alt="">
+            </div>
+
+        </div>
+        <script src="jquery-3.2.1.min.js"></script>
+        <script>
+            var Lazyload =(function(){
+                function Exposure($target,callback){
+                    this.$target = $target;
+                    this.callback = callback;
+                    this.bind();
+                    this.check();
+                }
+                Exposure.prototype = {
+                    bind: function(){
+                        var _this = this;
+                        $(window).on('scroll',function(){
+                            _this.check();
+                        })
+                    },
+                    check: function(){
+                        if(this.isVisible(this.$target)){
+                            this.callback(this.$target)
+                        }
+                    },
+                    isVisible: function(){
+                        var windowHeight = $(window).height(),
+                            scrollTop = $(window).scrollTop(),
+                            nodeTop = this.$target.offset().top;
+                        if(nodeTop+100< windowHeight + scrollTop && nodeTop > scrollTop){
+                            console.log(1)
+                            return true;
+                        }else{
+                            console.log(2);
+                            return false;
+                        }
+                    }
+                }
+                return {
+                    init: function($targets,callback){
+                        $targets.each(function(index,target){
+                            new Exposure($(target),callback)
+                        })
+                    }
+                }
+
+            })();
+            Lazyload.init($('.images img'),function($node){
+                showImg($node)
+            })
+            function showImg($img){
+                $img.attr('src',$img.attr('data-src'))
+            }
+        </script>
+    </body>
+</html>
